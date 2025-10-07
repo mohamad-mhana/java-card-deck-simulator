@@ -8,6 +8,15 @@ public class Card {
         this.face = face;
         this.suit = suit;
     }
+    // Get the face of the card
+    public String getFace() {
+        return face;
+    }
+
+    // Get the suit of the card
+    public String getSuit() {
+        return suit;
+    }
 
     //Get Unicode symbol for each suit
     private String getSuitSymbol() {

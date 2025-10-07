@@ -47,6 +47,27 @@ public class DeckOfCards {
             return null;
     }
 
+    // Deal Multiple Cards at Once
+    public Card[] dealHand(int numberOfCards) {
+        // Check if we have enough cards
+        if (numberOfCards > cardsRemaining()) {
+            System.out.println("Not enough cards! Only " + cardsRemaining() + " cards remaining.");
+            return null;
+        }
+
+        // Create array to hold the hand
+        Card[] hand = new Card[numberOfCards];
+
+        // Deal the cards
+        for (int i = 0; i < numberOfCards; i++) {
+            hand[i] = deal();
+        }
+
+        return hand;
+    }
+
+
+
     // count remaining undealt cards
     public int cardsRemaining() {
         return deck.length - currentCard;
@@ -77,6 +98,44 @@ public class DeckOfCards {
         }
     }
 
+    // Count Cards by Suit
+
+    public void countBySuit() {
+        int hearts = 0, diamonds = 0, clubs = 0, spades = 0;
+
+        // Count remaining cards by suit
+        for (int i = currentCard; i < deck.length; i++) {
+            String suit = deck[i].getSuit();
+            switch (suit) {
+                case "Hearts" -> hearts++;
+                case "Diamonds" -> diamonds++;
+                case "Clubs" -> clubs++;
+                case "Spades" -> spades++;
+            }
+        }
+
+        // Display the counts
+        System.out.println("\n--- Cards Remaining by Suit ---");
+        System.out.println("Hearts ♥: " + hearts);
+        System.out.println("Diamonds ♦: " + diamonds);
+        System.out.println("Clubs ♣: " + clubs);
+        System.out.println("Spades ♠: " + spades);
+        System.out.println("Total: " + cardsRemaining());
+    }
+
+    // Find a Specific Card
+    public boolean findCard(String face, String suit) {
+        // Search through remaining cards
+        for (int i = currentCard; i < deck.length; i++) {
+            if (deck[i].getFace().equals(face) && deck[i].getSuit().equals(suit)) {
+                System.out.println("✓ Found: " + deck[i]);
+                return true;
+            }
+        }
+
+        System.out.println("✗ Card not found: " + face + " of " + suit);
+        return false;
+    }
     // check if the deck is empty (no cards left to deal)
 
     public boolean isEmpty () {
